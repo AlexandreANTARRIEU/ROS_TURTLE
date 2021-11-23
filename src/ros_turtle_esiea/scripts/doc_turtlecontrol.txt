@@ -1,0 +1,3 @@
+Le Script turtlecontrol.py sert à déplacer la tortue de turtlesim en envoyant des message au topic /turtle1/cmd_vel
+
+Dans un premier temps il attend que l'utilisateur appuy sur une touche puis bouge la tortue en fonction.
