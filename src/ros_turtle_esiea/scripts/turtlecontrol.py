@@ -3,13 +3,15 @@
 import rospy
 from std_msgs.msg import String
 from geometry_msgs.msg import Twist
-
+from getkey import getkey, keys
 
 
 def command():
     commande = Twist()
 
-    direction = input("Direction zqsd :")
+
+    rospy.loginfo("Direction zqsd :")
+    direction = getkey()
     if direction == "z":
         print("J'avance")
         commande.linear.x = 1.0
