@@ -1,0 +1,13 @@
+/home/turtle/catkin_ws/install/_setup_util.py
+/home/turtle/catkin_ws/install/env.sh
+/home/turtle/catkin_ws/install/setup.bash
+/home/turtle/catkin_ws/install/local_setup.bash
+/home/turtle/catkin_ws/install/setup.sh
+/home/turtle/catkin_ws/install/local_setup.sh
+/home/turtle/catkin_ws/install/setup.zsh
+/home/turtle/catkin_ws/install/local_setup.zsh
+/home/turtle/catkin_ws/install/.rosinstall
+/home/turtle/catkin_ws/install/lib/pkgconfig/beginner_tutorials.pc
+/home/turtle/catkin_ws/install/share/beginner_tutorials/cmake/beginner_tutorialsConfig.cmake
+/home/turtle/catkin_ws/install/share/beginner_tutorials/cmake/beginner_tutorialsConfig-version.cmake
+/home/turtle/catkin_ws/install/share/beginner_tutorials/package.xml

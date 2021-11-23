@@ -1,0 +1,14 @@
+rosdistro: 'noetic
+
+  '
+roslaunch:
+  uris:
+    host_pop_os__46107: http://pop-os:46107/
+rosversion: '1.15.13
+
+  '
+run_id: 43412c58-4b81-11ec-aacf-11b94214e1df
+turtlesim:
+  background_b: 255
+  background_g: 86
+  background_r: 255
