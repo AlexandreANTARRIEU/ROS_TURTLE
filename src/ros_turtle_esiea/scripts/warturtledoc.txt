@@ -1,0 +1,3 @@
+Ce script python sert àfaire faire un carré à la tortue, 
+il demande la taille des bords du carré à l'utilisateur, 
+puis il fait un séquence de 8 mouvement(avance puis 90°) qui permet de faire un carré.
