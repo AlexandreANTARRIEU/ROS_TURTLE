@@ -5,31 +5,29 @@ from geometry_msgs.msg import Twist
 import math
 from tkinter import *
 import tkinter as tk
+from turtlesim.srv import Spawn
+
 
 taille = "0"
 
 #Séquence corespondant à un carré
-def command(direction, taille):
+def command(angle, taille):
     #défini le type de message
     commande = Twist()
 
-    #gestion de la direction
-    if direction == 1:
-        commande.linear.x = taille
-    elif direction == 2:
-        commande.angular.z = math.pi/2 #équivalent 90°
-    elif direction == 3:
-        commande.linear.x = taille
-    elif direction == 4:
-        commande.angular.z = math.pi/2 #équivalent 90°
-    elif direction == 5:
-        commande.linear.x = taille
-    elif direction == 6:
-        commande.angular.z = math.pi/2 #équivalent 90°
-    elif direction == 7:
-        commande.linear.x = taille
-    elif direction == 8:
-        commande.angular.z = math.pi/2 #équivalent 90°
+    commande.linear.x = taille
+    commande.angular.z = angle
+
+    return commande
+
+#Séquence corespondant à un carré
+def command2(angle, taille):
+    #défini le type de message
+    commande = Twist()
+
+    commande.linear.x = taille
+    commande.angular.z = angle
+
     return commande
 
 #Crée le publisher et publie les messages au topic
@@ -37,26 +35,52 @@ def squareturtle(taille):
     #création du publisher
     pub = rospy.Publisher("/turtle1/cmd_vel", Twist, queue_size=10)
     rospy.init_node('warturtle', anonymous=True)
+
+    pub2 = rospy.Publisher("/turtle2/cmd_vel", Twist, queue_size=10)
+    rospy.init_node('warturtle', anonymous=True)
+
     rate = rospy.Rate(0.9)
 
     #taille entrée au début mise en entier
     print(taille)
     tailleint = int(taille)
-
+    angle = math.pi/2
     #jeu en continu
     while not rospy.is_shutdown():
-
         i = 0
-        while i < 8:
-            i = i+1
-            commande = command(i, tailleint)
+        while i < 2:
+            if i == 0:
+                j=1
+            else:
+                j=-1
+            i = i + 1
+            commande = command(j*angle,tailleint)
+            commande2 = command(j*-angle,tailleint)
             rospy.loginfo(commande)
             pub.publish(commande)
+            pub2.publish(commande2)
             rate.sleep()
+            commande = command(j*-angle, tailleint)
+            commande2 = command(j*angle, tailleint)
+            pub.publish(commande)
+            pub2.publish(commande2)
+            rate.sleep()
+            commande = command(j*-angle, tailleint)
+            commande2 = command(j*angle, tailleint)
+            rospy.loginfo(commande)
+            pub.publish(commande)
+            pub2.publish(commande2)
+            rate.sleep()
+            commande = command(j*-angle, tailleint)
+            commande2 = command(j*angle, tailleint)
+            pub.publish(commande)
+            pub2.publish(commande2)
+            rate.sleep()
+
 
 def chekbox():
     window = tk.Tk()
-    window.title('Sélection de la taille du carré')
+    window.title('Sélection de la taille du rond')
     window.geometry('300x100')
 
 
@@ -75,6 +99,8 @@ def chekbox():
 if __name__ == '__main__':
     try:
         chekbox()
+        spawn_turtle = rospy.ServiceProxy('spawn', Spawn)
+        spawn_turtle(4, 4, 0.2, "turtle2")
         squareturtle(taille)
     except rospy.ROSInterruptException:
         pass
