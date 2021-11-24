@@ -1,0 +1,8 @@
+<launch>
+
+	<node pkg="turtlesim" name="turtlesim_node" type="turtlesim_node">
+	</node>
+ 
+	<node pkg="ros_turtle_esiea" name="Script" type="warturtle.py">
+	</node>
+ </launch>

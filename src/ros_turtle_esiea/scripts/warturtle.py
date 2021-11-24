@@ -3,6 +3,10 @@
 import rospy
 from geometry_msgs.msg import Twist
 import math
+from tkinter import *
+import tkinter as tk
+
+taille = "0"
 
 #Séquence corespondant à un carré
 def command(direction, taille):
@@ -36,6 +40,7 @@ def squareturtle(taille):
     rate = rospy.Rate(0.9)
 
     #taille entrée au début mise en entier
+    print(taille)
     tailleint = int(taille)
 
     #jeu en continu
@@ -49,10 +54,27 @@ def squareturtle(taille):
             pub.publish(commande)
             rate.sleep()
 
+def chekbox():
+    window = tk.Tk()
+    window.title('Sélection de la taille du carré')
+    window.geometry('300x100')
+
+
+    def getEntry():
+        global taille
+        taille = myEntry.get()
+        window.destroy()
+
+
+    myEntry = tk.Entry(window, width=40)
+    myEntry.pack(pady=20)
+    btn = tk.Button(window, height=1, width=10, text="Valider", command=getEntry)
+    btn.pack()
+    window.mainloop()
 
 if __name__ == '__main__':
     try:
-        taille = input("entrer la taille d'un coté du carré")
+        chekbox()
         squareturtle(taille)
     except rospy.ROSInterruptException:
         pass
